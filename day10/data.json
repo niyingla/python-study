@@ -1,0 +1,10 @@
+{
+  "name": "小明",
+  "age": 20,
+  "graduate": "清华大学",
+  "pet": [{"dag":"狗", "age": 1},
+    {"cat": "猫","age": 2},
+    {"pig": "猪","age": 3}],
+
+"Lucky Numbers": [2,5,8]
+}

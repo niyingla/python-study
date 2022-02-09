@@ -1,0 +1,27 @@
+{
+  "name": "tom",
+  "age": 18,
+  "isMan": true,
+  "school": null,
+  "address": {
+    "country": "中国",
+    "city": "北京",
+    "street": "长安街"
+  },
+  "numbers": [
+    2,
+    6,
+    8,
+    9
+  ],
+  "links": [
+    {
+      "name": "Baidu",
+      "url": "http://www.baidu.com"
+    },
+    {
+      "name": "TaoBao",
+      "url": "http://www.taobao.com"
+    }
+  ]
+}
