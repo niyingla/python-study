@@ -1,8 +1,10 @@
+import time
+
 from selenium import webdriver
 
 # 启动浏览器并打开一个网页
 driver = webdriver.Chrome("./chromedriver")
-driver.get("https://www.example.com")
+driver.get("https://www.baidu.com")
 
 # 打开一个新的窗口
 driver.execute_script("window.open('https://www.google.com');")
@@ -15,10 +17,10 @@ driver.switch_to.window(window_handles[1])
 
 # 在第二个窗口中进行操作
 # ...
-
+time.sleep(1)
 # 切换回第一个窗口
 driver.switch_to.window(window_handles[0])
-
+time.sleep(2)
 # 在第一个窗口中进行操作
 # ...
 
