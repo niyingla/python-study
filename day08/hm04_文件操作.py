@@ -36,15 +36,15 @@ with open(file, mode="r", encoding='utf-8') as f:
 
 
 # 循环读取
-# file = "test_file/readme.txt"
+file = "test_file/readme.txt"
 # # 文件的读取
 # # 1,打开文件
-# with open(file, mode="r", encoding='utf-8') as f:
-#     while True:
-#     # 2,操作文件:循环读取
-#         test = f.readline()
-#         print(test,end="")
-#         if not test:
-#             break
+with open(file, mode="r", encoding='utf-8') as f:
+    while True:
+    # 2,操作文件:循环读取
+        test = f.readline()
+        print(test,end="")
+        if not test:
+            break
 # # 结论
 # # readline()会自动黄,默认只读取第一行,可以进行循环获取并判断

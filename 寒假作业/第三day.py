@@ -32,3 +32,10 @@ info.reverse()
 for i in info:
     print(i)
 print(info)
+
+
+if __name__ == '__main__':
+    '''判断dict是否包含某个属性 返回bool'''
+    dict = {'name': 'huohuo', 'age': 18}
+    print('name' in dict)
+    
