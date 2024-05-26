@@ -9,9 +9,10 @@ from selenium.webdriver import DesiredCapabilities, ActionChains
 caps = DesiredCapabilities.CHROME
 webdriver = webdriver.Chrome("./chromedriver")
 webdriver.implicitly_wait(5)
+# 原理 通过浏览器驱动 执行get请求
 webdriver.get("https://www.baidu.com/")
 webdriver.maximize_window()
-
+#原理元素搜索框 输入 //input[@class="search-input-el"]
 ActionChains(webdriver).move_to_element(webdriver.find_element(By.LINK_TEXT, "更多")).perform()
 time.sleep(1)
 
