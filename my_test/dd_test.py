@@ -8,6 +8,7 @@ from selenium.webdriver import DesiredCapabilities, ActionChains
 
 caps = DesiredCapabilities.CHROME
 webdriver = webdriver.Chrome("./chromedriver")
+webdriver.implicitly_wait(5)
 webdriver.get("https://www.baidu.com/")
 webdriver.maximize_window()
 
