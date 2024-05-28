@@ -56,7 +56,6 @@ def get_distance(full_url, slider_url):
     '''获取滑块距离'''
     #下载图片
     full_image_path = _down_img(full_url)
-    #下载图片
     slider_image_path = _down_img(slider_url)
     #获取滑块距离
     distance = _get_slide_distance(full_image_path, slider_image_path)
