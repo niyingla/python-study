@@ -90,7 +90,7 @@ class Test():
         distance = get_distance(full_image_path_url, slider_image_path_url)
 
         # 滑动按钮获取
-        slider_btn = self.driver.find_element(By.XPATH,'//div[@class="captcha-slider-btn"]')
+        slider_btn = self.driver.find_element(By.XPATH, '//div[@class="captcha-slider-btn"]')
         # 滑动
         self.move_to_distance(distance, slider_btn)
         # 退出
