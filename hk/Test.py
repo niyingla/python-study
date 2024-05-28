@@ -103,11 +103,9 @@ class Test():
 
         action.click_and_hold(source)
         a = 0
-        time.sleep(1)
         for x in self.generate_tracks(distence):
             action.move_by_offset(xoffset=x[0] - a, yoffset=x[1])
             a = x[0]
-        time.sleep(0.2)
         action.release().perform()
         time.sleep(10)
 
