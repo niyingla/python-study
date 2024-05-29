@@ -15,7 +15,7 @@ class Test():
         option.add_experimental_option('excludeSwitches', ['enable-automation'])
         # 它被用于标记一个浏览器是否被自动化工具（如 Selenium）控制。如果这个特性被启用，网站可以检测到这个浏览器实例是被自动化工具控制的。
         option.add_argument('--disable-blink-features=AutomationControlled')
-        self.driver = webdriver.Chrome(options=option)
+        self.driver = webdriver.Chrome(executable_path=r'../my_test/chromedriver.exe', options=option)
         self.driver.implicitly_wait(10)
 
     def __ease_out_expo(self, sep):
