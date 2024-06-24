@@ -3,9 +3,11 @@ from selenium import webdriver
 from selenium.webdriver import ActionChains
 from SlideMatch import *
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from lxml import etree
 import time
 import random
+import json
 
 
 class Test():
@@ -15,7 +17,9 @@ class Test():
         option.add_experimental_option('excludeSwitches', ['enable-automation'])
         # 它被用于标记一个浏览器是否被自动化工具（如 Selenium）控制。如果这个特性被启用，网站可以检测到这个浏览器实例是被自动化工具控制的。
         option.add_argument('--disable-blink-features=AutomationControlled')
-        self.driver = webdriver.Chrome(executable_path=r'../my_test/chromedriver.exe', options=option)
+        caps = DesiredCapabilities.CHROME
+        caps['goog:loggingPrefs'] = {'performance': 'ALL'}
+        self.driver = webdriver.Chrome(executable_path=r'D:/workTool/Application/chromedriver.exe',desired_capabilities=caps, options=option)
         self.driver.implicitly_wait(10)
 
     def __ease_out_expo(self, sep):
@@ -71,9 +75,9 @@ class Test():
         self.driver.find_element(By.XPATH,'//div[@class="account-center-switch-button switch-switch false account"]').click()
         time.sleep(1.3)
         # 输入账号密码
-        self.driver.find_element(By.XPATH,'//input[@name="mobile"]').send_keys('18877686797')
+        self.driver.find_element(By.XPATH,'//input[@name="mobile"]').send_keys('17656309270')
         # 输入密码
-        self.driver.find_element(By.XPATH,'//input[@name="password"]').send_keys('12345678')
+        self.driver.find_element(By.XPATH,'//input[@name="password"]').send_keys('Xchl2526666.')
         # 选中客户协议
         self.driver.find_element(By.XPATH,'//span[@class="check-box-icon"]').click()
         # 点击登录
@@ -93,6 +97,14 @@ class Test():
         slider_btn = self.driver.find_element(By.XPATH, '//div[@class="captcha-slider-btn"]')
         # 滑动
         self.move_to_distance(distance, slider_btn)
+        time.sleep(5)
+        #切换当前网址
+        self.driver.get('https://www.autoengine.com/jdc/industry/live/screen?isHideSiderMemu=1&isHideHeader=1&room_id=7382762764541938471')
+        #睡两秒
+        time.sleep(5)
+        get_response_url = self.get_response_url('https://www.autoengine.com/motor/dealer/jdc_saas/live/data/screen?__method=window.fetch')
+        print(get_response_url)
+        #dealer/jdc_saas/live/data/screen
         # 退出
         self.driver.quit()
 
@@ -108,6 +120,31 @@ class Test():
         # 执行动作
         action.release().perform()
 
+    @staticmethod
+    def process_browser_log_entry(entry):
+        response = json.loads(entry['message'])['message']
+        return response
+
+    def get_response_url(self, url):
+        result = []
+        # 获取浏览器日志
+        browser_log = self.driver.get_log('performance')
+        # 获取所有的message 部分
+        events = [Test.process_browser_log_entry(entry) for entry in browser_log]
+        # 过滤出Network.responseReceived的事件
+        events = [event for event in events if 'Network.responseReceived' in event['method']]
+        for event in events:
+            # 找到包含response的event['params']
+            if 'response' in event['params'] and 'url' in event['params']['response']:
+                #包含指定路径的请求地址
+                if url in event['params']['response']['url']:
+                    #
+                    request_id = event['params']['requestId']
+                    response_body = self.driver.execute_cdp_cmd('Network.getResponseBody', {'requestId': request_id})
+                    body = response_body["body"]
+                    result.append(body)
+
+        return result
 
 if __name__ == '__main__':
     a = Test()
