@@ -17,6 +17,7 @@ class Test():
         option.add_experimental_option('excludeSwitches', ['enable-automation'])
         # 它被用于标记一个浏览器是否被自动化工具（如 Selenium）控制。如果这个特性被启用，网站可以检测到这个浏览器实例是被自动化工具控制的。
         option.add_argument('--disable-blink-features=AutomationControlled')
+        option.binary_location = r'D:\workTool\Application\chrome.exe'
         caps = DesiredCapabilities.CHROME
         caps['goog:loggingPrefs'] = {'performance': 'ALL'}
         self.driver = webdriver.Chrome(executable_path=r'D:/workTool/Application/chromedriver.exe',desired_capabilities=caps, options=option)
@@ -99,11 +100,11 @@ class Test():
         self.move_to_distance(distance, slider_btn)
         time.sleep(5)
         #切换当前网址
-        self.driver.get('https://www.autoengine.com/jdc/industry/live/screen?isHideSiderMemu=1&isHideHeader=1&room_id=7382762764541938471')
+        self.driver.get('https://www.autoengine.com/jdc/industry/live/screen?isHideSiderMemu=1&isHideHeader=1&room_id=7478603243621337892')
         #睡两秒
         time.sleep(5)
-        get_response_url = self.get_response_url('https://www.autoengine.com/motor/dealer/jdc_saas/live/data/screen?__method=window.fetch')
-        print(get_response_url)
+        url_response = self.get_response_url('https://www.autoengine.com/motor/dealer/jdc_saas/live/data/screen?__method=window.fetch')
+        print(url_response)
         #dealer/jdc_saas/live/data/screen
         # 退出
         self.driver.quit()

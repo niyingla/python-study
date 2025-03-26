@@ -42,7 +42,13 @@ def generate_md5(paramText):
 
 if __name__ == '__main__':
     sortMap = OrderedDict()
-    sortMap[TENANT_KEY] = "wpLHbUCwAAjnMUfpdw_xR2F1-PW8Lutw"
+    tenantKey = input("请输入tenantKey\n")
+    if tenantKey=="0":
+        tenantKey = "wpLHbUCwAAjnMUfpdw_xR2F1-PW8Lutw"
+        sign = "zdfhzsjfgzxfzhbfk4375sdfcxvkj"
+    else:
+        sign = input("请输入sign\n")
+    sortMap[TENANT_KEY] = tenantKey
     sortMap[TIMESTAMP] = str(int(time.time() * 1000))
     print("timestamp:", sortMap[TIMESTAMP])
     paramList = []
@@ -51,7 +57,7 @@ if __name__ == '__main__':
         if value:
             sb += value
         paramList.append(sb)
-    paramList.append("key=zdfhzsjfgzxfzhbfk4375sdfcxvkj")
+    paramList.append("key="+ sign)
     paramText = "&".join(paramList)
     print("加密源串:", paramText)
     paramSign = generate_md5(paramText)

@@ -14,6 +14,7 @@ wx = WindowControl(
     # searchDepth=1
 )
 
+
 # 切换窗口
 wx.SwitchToThisWindow()
 # 寻找会话控件绑定
