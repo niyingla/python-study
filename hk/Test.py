@@ -100,7 +100,7 @@ class Test():
         self.move_to_distance(distance, slider_btn)
         time.sleep(5)
         #切换当前网址
-        self.driver.get('https://www.autoengine.com/jdc/industry/live/screen?isHideSiderMemu=1&isHideHeader=1&room_id=7478603243621337892')
+        self.driver.get('https://www.autoengine.com/jdc/industry/live/screen?isHideSiderMemu=1&isHideHeader=1')
         #睡两秒
         time.sleep(5)
         url_response = self.get_response_url('https://www.autoengine.com/motor/dealer/jdc_saas/live/data/screen?__method=window.fetch')
