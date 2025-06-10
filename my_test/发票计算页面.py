@@ -3,7 +3,7 @@ import tkinter as tk  # 导入 Tkinter 库
 def add_amount():  # 定义添加金额的函数
     try:
         user_input = entry.get()  # 获取输入框中的文本
-        amount = float(user_input)  # 将输入的文本转换为浮动数字
+        amount = int(user_input)  # 将输入的文本转换为浮动数字
         amounts.append(amount)  # 将金额添加到金额列表中
         amounts_label.config(text="当前金额列表: " + ", ".join(map(str, amounts)))  # 更新显示金额列表的标签
         entry.delete(0, tk.END)  # 清空输入框
@@ -14,7 +14,7 @@ def add_amount():  # 定义添加金额的函数
 def calculate_total():  # 定义计算总金额的函数
     user_input = entry.get()  # 获取输入框中的文本
     entry.delete(0, tk.END)  # 清空输入框
-    totalAmount = float(user_input)  # 将输入的文本转换为浮动数字
+    totalAmount = int(user_input)  # 将输入的文本转换为浮动数字
     comp = minComp(amounts, totalAmount)
     total_label.config(text=comp)  # 更新显示总金额的标签
 
@@ -68,7 +68,7 @@ def minComp(list, total):
 
 root = tk.Tk()  # 创建主窗口对象
 root.title("发票最小组合计算")  # 设置窗口标题
-root.geometry("555x444")  # 设置窗口大小为 555x888
+root.geometry("888x666")  # 设置窗口大小为 555x888
 
 entry = tk.Entry(root, font=('Helvetica', 14))  # 创建一个输入框，设置字体
 entry.pack(pady=10)  # 将输入框添加到窗口，并设置上下间距
