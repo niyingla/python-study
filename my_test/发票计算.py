@@ -38,6 +38,24 @@ class CombinationSum:
         return self.results
 
 
+def minComp(list,total):
+    # 循环array的长度次
+    for i in range(1, len(list) + 1):
+        cs = CombinationSum()
+        cs.findCombinations(amountList, total, i)
+        if len(cs.getResults()) > 0:
+            for result in cs.getResults():
+                lastResults.append(result)
+    # 判断是否为空
+    if len(lastResults) == 0:
+        print("没有符合条件的组合")
+        input("Press any key to exit")
+        exit(0)
+    # 对sortResults 进行排序 排序规则就是每个元素求和的最小值
+    lastResults.sort(key=lambda x: sum(x), reverse=False)
+    return  f"最小的组合是: {lastResults[0]},总和是：{sum(lastResults[0])}"
+
+
 if __name__ == '__main__':
     lastResults = []
     # array = [120,148,136,33,188, 68, 62, 168, 61, 191, 146]
@@ -53,22 +71,7 @@ if __name__ == '__main__':
     # 按键输入
     targetSum = int(input())
     # targetSum = 560
-    # 循环array的长度次
-    for i in range(1, len(amountList)+1):
-        cs = CombinationSum()
-        cs.findCombinations(amountList, targetSum, i)
-        if len(cs.getResults()) > 0:
-            for result in cs.getResults():
-                lastResults.append(result)
-
-    # 判断是否为空
-    if len(lastResults) == 0:
-        print("没有符合条件的组合")
-        input("Press any key to exit")
-        exit(0)
-
-    # 对sortResults 进行排序 排序规则就是每个元素求和的最小值
-    lastResults.sort(key=lambda x: sum(x), reverse=False)
-    print(f"最小的组合是: {lastResults[0]},总和是：{sum(lastResults[0])}")
+    comp = minComp(amountList, targetSum)
+    print(comp)
     # 输入任意键
     input("Press any key to exit")
