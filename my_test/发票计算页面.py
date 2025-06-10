@@ -79,13 +79,13 @@ lastResults = []
 totalAmount = 0
 
 add_button = tk.Button(root, text="添加金额", command=add_amount, font=('Helvetica', 14))  # 创建添加金额按钮
-add_button.pack(pady=0,side=tk.LEFT, padx=60)  # 将按钮添加到窗口，并设置上下间距
+add_button.pack(side=tk.LEFT, padx=60)  # 将按钮添加到窗口，并设置上下间距
 
 calculate_button = tk.Button(root, text="计算金额", command=calculate_total, font=('Helvetica', 14))  # 创建计算金额按钮
-calculate_button.pack(pady=0,side=tk.RIGHT, padx=60)  # 将按钮添加到窗口，并设置上下间距
+calculate_button.pack(side=tk.RIGHT, padx=60)  # 将按钮添加到窗口，并设置上下间距
 
-amounts_label = tk.Label(root, text="当前金额列表: ", font=('Helvetica', 12), anchor='w', justify='left', height=10)  # 创建显示金额列表的标签
-amounts_label.pack(pady=20, padx=10, fill=tk.X)  # 将金额列表标签添加到窗口，并设置间距和填充方式
+amounts_label = tk.Label(root, text="金额列表: ", font=('Helvetica', 12), anchor='w', justify='left', height=10)  # 创建显示金额列表的标签
+amounts_label.pack(padx=10,pady=20,  fill=tk.X)  # 将金额列表标签添加到窗口，并设置间距和填充方式
 
 total_label = tk.Label(root, text="总金额: 0", font=('Helvetica', 16), height=20)  # 创建显示总金额的标签
 #指定显示框大小 显示大一点
