@@ -18,6 +18,7 @@ def calculate_total():  # 定义计算总金额的函数
     if not user_input:
             total_label.config(text="请输入总金额")  # 更新显示总金额的标签
             return
+    results.clear()
     total_amount = int(user_input)  # 将输入的文本转换为浮动数字
     comp = min_comp(amounts, total_amount)
     total_label.config(text=comp)  # 更新显示总金额的标签
@@ -56,6 +57,7 @@ def backtrack(amount_list, combination, start, current_sum, n, target_sum):
 
 
 def min_comp(list, total):
+    last_results = []
     # 循环array的长度次
     for i in range(1, len(list) + 1):
         find_combinations(amounts, total, i)
@@ -79,8 +81,6 @@ entry.pack(pady=10)  # 将输入框添加到窗口，并设置上下间距
 
 amounts = []  # 初始化金额列表
 results = []
-last_results = []
-total_amount = 0
 
 add_button = tk.Button(root, text="添加金额", command=add_amount, font=('Helvetica', 14))  # 创建添加金额按钮
 add_button.pack(side=tk.LEFT, padx=60)  # 将按钮添加到窗口，并设置上下间距
