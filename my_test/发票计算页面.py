@@ -56,10 +56,10 @@ def backtrack(amount_list, combination, start, current_sum, n, target_sum):
 
 
 
-def min_comp(list, total):
+def min_comp(input_list, total):
     last_results = []
     # 循环array的长度次
-    for i in range(1, len(list) + 1):
+    for i in range(1, len(input_list) + 1):
         find_combinations(amounts, total, i)
         if len(results) > 0:
             for result in results:
