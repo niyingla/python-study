@@ -14,11 +14,15 @@ def add_amount():  # 定义添加金额的函数
 def calculate_total():  # 定义计算总金额的函数
     user_input = entry.get()  # 获取输入框中的文本
     entry.delete(0, tk.END)  # 清空输入框
+    #判断没输入内容
+    if not user_input:
+            total_label.config(text="请输入总金额")  # 更新显示总金额的标签
+            return
     totalAmount = int(user_input)  # 将输入的文本转换为浮动数字
     comp = minComp(amounts, totalAmount)
     total_label.config(text=comp)  # 更新显示总金额的标签
 
-    """ 组合总和 
+    """ 组合总和
        amountList: 金额列表
        targetSum: 目标金额
        n: 组合长度
@@ -28,7 +32,7 @@ def findCombinations(amountList, targetSum, n):
     amountList.sort()
     backtrack(amountList, [], 0, 0, n, targetSum)
 
-""" 
+"""
 计算组合
 array: 金额列表
 combination: 当前组合
@@ -86,6 +90,9 @@ calculate_button.pack(side=tk.RIGHT, padx=60)  # 将按钮添加到窗口，并�
 
 amounts_label = tk.Label(root, text="金额列表: ", font=('Helvetica', 12), anchor='w', justify='left', height=10)  # 创建显示金额列表的标签
 amounts_label.pack(padx=10,pady=20,  fill=tk.X)  # 将金额列表标签添加到窗口，并设置间距和填充方式
+
+#entry键也触发 add_amount按钮
+entry.bind("<Return>", lambda event: add_amount())  # 绑定回车键触发 add_amount 函数
 
 total_label = tk.Label(root, text="总金额: 0", font=('Helvetica', 16), height=20)  # 创建显示总金额的标签
 #指定显示框大小 显示大一点
