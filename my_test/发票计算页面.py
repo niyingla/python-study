@@ -99,5 +99,4 @@ total_label = tk.Label(root, text="总金额: 0", font=('Helvetica', 16), height
 total_label.pack(pady=15, padx=10, fill=tk.X)
 #total_label.pack(pady=20, padx=15, fill=tk.X) # 将总金额标签添加到窗口，并设置上下间距
 
-
 root.mainloop()  # 启动 Tkinter 事件循环
