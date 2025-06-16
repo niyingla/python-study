@@ -39,7 +39,7 @@ def on_submit():
             # 查找并替换匹配到的 sort = 数字
             def replace(match):
                 sort_value = int(match.group(1))
-                if A <= sort_value:  # 判断 A 是否小于等于匹配到的数字
+                if sort_value >= A :  # 判断 A 是否小于等于匹配到的数字
                     new_value = sort_value + B
                     updated_line = f"修改前: {match.group(0)} -> 修改后: sort = {new_value}\n"
                     text_box.insert("end", updated_line)  # 在窗口显示修改前后的内容
