@@ -3,6 +3,9 @@ from tkinter import Tk, filedialog, Text, Scrollbar, Button, Label, Entry
 
 # 创建 Tkinter 窗口
 root = Tk()
+# 隐藏黑色边框
+root.overrideredirect(True)
+# 隐藏黑框框
 root.title("文件修改工具")
 
 # 创建标签和输入框
