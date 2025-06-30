@@ -5,7 +5,7 @@ conn = mysql.connector.connect(
     host='mysql-5632a4182a17-public.rds.volces.com',
     user='newlinktest',
     password='GRvDoXG#hh338x42',
-    database='newlink10086'
+    database='newlink106703'
 )
 cursor = conn.cursor()
 
@@ -22,10 +22,10 @@ tables = cursor.fetchall()
 # Loop through each table
 for (table,) in tables:
     while True:
-        # Select ids to delete where tenant_id != 103049 (batch of 10,000)
+        # Select ids to delete where tenant_id != 106703 (batch of 10,000)
         cursor.execute(f"""
             SELECT id FROM {table}
-            WHERE tenant_id != 103049
+            WHERE tenant_id != 106703
             LIMIT 10000
         """)
         ids_to_delete = cursor.fetchall()
