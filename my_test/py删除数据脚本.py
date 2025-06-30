@@ -19,24 +19,34 @@ cursor.execute("""
 # Fetch all table names
 tables = cursor.fetchall()
 
-# Loop through each table and execute the DELETE query in batches of 100,000
+# Loop through each table
 for (table,) in tables:
     while True:
+        # Select ids to delete where tenant_id != 103049 (batch of 10,000)
+        cursor.execute(f"""
+            SELECT id FROM {table}
+            WHERE tenant_id != 103049
+            LIMIT 10000
+        """)
+        ids_to_delete = cursor.fetchall()
+
+        # If no rows to delete, break out of the loop
+        if not ids_to_delete:
+            break
+
+        # Prepare DELETE query for batch deletion
+        ids = [str(row[0]) for row in ids_to_delete]
+        ids_str = ",".join(ids)
+
+        # Delete the selected rows in batches of 100,000
         delete_query = f"""
             DELETE FROM {table}
-            WHERE tenant_id != 103049
-            LIMIT 100000
+            WHERE id IN ({ids_str})
         """
         try:
             cursor.execute(delete_query)
             conn.commit()  # Commit the transaction
-            print(f"Deleted rows from {table}")
-
-            # Check if there are more rows to delete
-            cursor.execute(f"SELECT COUNT(*) FROM {table} WHERE tenant_id != 103049")
-            remaining_rows = cursor.fetchone()[0]
-            if remaining_rows == 0:
-                break
+            print(f"Deleted {len(ids_to_delete)} rows from {table}")
         except Exception as e:
             print(f"Error in {table}: {e}")
             break
