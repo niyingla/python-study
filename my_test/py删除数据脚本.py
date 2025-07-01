@@ -7,9 +7,9 @@ start_time = time.time()
 tenant_id = 106708
 # Establish database connection
 conn = mysql.connector.connect(
-    host='mysql-f0db9778c442-public.rds.volces.com',
-    user='root',
-    password='Qiyu@0630',
+    host='mysqlf7ace716eecd.rds.ivolces.com',
+    user='newlinkprod',
+    password='jLXnbGMgQUrA$PVn',
     database='newlink' + str(tenant_id)
 )
 cursor = conn.cursor()
@@ -46,7 +46,7 @@ for (table,) in tables:
         cursor.execute(f"""
             SELECT id FROM {table}
             WHERE tenant_id != {tenant_id}
-            LIMIT 100000
+            LIMIT 50000
         """)
         ids_to_delete = cursor.fetchall()
 
