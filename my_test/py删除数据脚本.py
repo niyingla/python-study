@@ -8,7 +8,7 @@ conn = mysql.connector.connect(
     host='mysql-f0db9778c442-public.rds.volces.com',
     user='root',
     password='Qiyu@0630',
-    database='newlink106703'
+    database='newlink106708'
 )
 cursor = conn.cursor()
 
@@ -34,16 +34,16 @@ for (table,) in tables:
         if not cursor.fetchone():
             #不存在id字段 通过tenant_id删除
             cursor.execute(f"""
-                  delete FROM {table} where tenant_id != 106703
+                  delete FROM {table} where tenant_id != 106708
                """)
             print(f"Deleted {table} by tenant_id")
             break
 
         table_delete_start = time.time()
-        # Select ids to delete where tenant_id != 106703 (batch of 10,000)
+        # Select ids to delete where tenant_id != 106708 (batch of 10,000)
         cursor.execute(f"""
             SELECT id FROM {table}
-            WHERE tenant_id != 106703
+            WHERE tenant_id != 106708
             LIMIT 100000
         """)
         ids_to_delete = cursor.fetchall()
