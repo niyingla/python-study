@@ -1,10 +1,12 @@
+import time
+
 import mysql.connector
 
 # Establish database connection
 conn = mysql.connector.connect(
-    host='mysql-5632a4182a17-public.rds.volces.com',
-    user='newlinktest',
-    password='GRvDoXG#hh338x42',
+    host='mysql-f0db9778c442-public.rds.volces.com',
+    user='root',
+    password='Qiyu@0630',
     database='newlink106703'
 )
 cursor = conn.cursor()
@@ -47,6 +49,10 @@ for (table,) in tables:
             cursor.execute(delete_query)
             conn.commit()  # Commit the transaction
             print(f"Deleted {len(ids_to_delete)} rows from {table}")
+
+            #睡眠0.5s
+            time.sleep(0.5)
+
         except Exception as e:
             print(f"Error in {table}: {e}")
             break
