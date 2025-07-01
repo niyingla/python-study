@@ -39,6 +39,7 @@ for (table,) in tables:
             print(f"Deleted {table} by tenant_id")
             break
 
+        table_delete_start = time.time()
         # Select ids to delete where tenant_id != 106703 (batch of 10,000)
         cursor.execute(f"""
             SELECT id FROM {table}
@@ -64,8 +65,10 @@ for (table,) in tables:
         try:
             cursor.execute(delete_query)
             conn.commit()  # Commit the transaction
-            print(f"Deleted {len(ids_to_delete)} rows from {table}")
 
+            print(f"Deleted {len(ids_to_delete)} rows from {table}")
+            #打印时间取小数点后两位
+            print(f"table delete Time taken: {time.time() - table_delete_start:.2f} seconds")
             #睡眠0.5s
             time.sleep(0.5)
 
