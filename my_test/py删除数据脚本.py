@@ -24,6 +24,20 @@ tables = cursor.fetchall()
 # Loop through each table
 for (table,) in tables:
     while True:
+        # 判断当前表是否有id字段 没有就跳过
+        cursor.execute(f"""
+            SHOW COLUMNS FROM {table}
+            WHERE Field = 'id'
+        """)
+
+        if not cursor.fetchone():
+            #不存在id字段 通过tenant_id删除
+            cursor.execute(f"""
+                  delete FROM {table} where tenant_id != 106703
+               """)
+            print(f"Deleted {table} by tenant_id")
+            break
+
         # Select ids to delete where tenant_id != 106703 (batch of 10,000)
         cursor.execute(f"""
             SELECT id FROM {table}
