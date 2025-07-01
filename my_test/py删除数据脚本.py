@@ -2,6 +2,7 @@ import time
 
 import mysql.connector
 
+start_time = time.time()
 # Establish database connection
 conn = mysql.connector.connect(
     host='mysql-f0db9778c442-public.rds.volces.com',
@@ -42,12 +43,13 @@ for (table,) in tables:
         cursor.execute(f"""
             SELECT id FROM {table}
             WHERE tenant_id != 106703
-            LIMIT 100,000
+            LIMIT 100000
         """)
         ids_to_delete = cursor.fetchall()
 
         # If no rows to delete, break out of the loop
         if not ids_to_delete:
+            print(f"No rows to delete in {table}")
             break
 
         # Prepare DELETE query for batch deletion
@@ -74,3 +76,5 @@ for (table,) in tables:
 # Close the cursor and connection
 cursor.close()
 conn.close()
+#输入完成，并打印时间
+print(f"Time taken: {time.time() - start_time} seconds")
