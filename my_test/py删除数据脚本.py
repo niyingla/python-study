@@ -3,7 +3,7 @@ import time
 import mysql.connector
 
 start_time = time.time()
-#删除租户id
+#保留租户id
 tenant_id = 106708
 # Establish database connection
 conn = mysql.connector.connect(
