@@ -42,7 +42,7 @@ for (table,) in tables:
         cursor.execute(f"""
             SELECT id FROM {table}
             WHERE tenant_id != 106703
-            LIMIT 10000
+            LIMIT 100,000
         """)
         ids_to_delete = cursor.fetchall()
 
