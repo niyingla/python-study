@@ -6,10 +6,14 @@ start_time = time.time()
 #清除租户id
 tenant_id = 106708
 #清除共享库序号
-share_db_seq = 21
+share_db_seq = 13
+#防止错误执行，真正执行需要删除
+if (1 == 1):
+    raise Exception('error')
+
 # Establish database connection
 conn = mysql.connector.connect(
-    host='mysqlbfa17a0251a3.rds.ivolces.com------------',
+    host='mysqlbfa17a0251a3.rds.ivolces.com',
     user='newlinkprod',
     password='jLXnbGMgQUrA$PVn',
     database='newlink_share' + str(share_db_seq)
