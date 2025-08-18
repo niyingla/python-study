@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import time
 
 class PopulationCrawler:
 
@@ -14,9 +15,9 @@ class PopulationCrawler:
             print(f"请求失败: {e}")
             return None
 
-    def parse_content(self, get_data_url):
-        cur_crawler = PopulationCrawler()
-        html_content = cur_crawler.fetch_content(get_data_url)
+    @staticmethod
+    def parse_content( get_data_url):
+        html_content = PopulationCrawler.fetch_content(get_data_url)
         soup = BeautifulSoup(html_content, 'html.parser')
         cur_population_data = {}
 
@@ -41,7 +42,7 @@ class PopulationCrawler:
                 next_page_url = find.get("href")
                 if next_page_url:
                     next_page_url =  next_page_url
-                    cur_population_data.update(self.parse_content(next_page_url))
+                    cur_population_data.update(PopulationCrawler.parse_content(next_page_url))
 
         return cur_population_data
 
@@ -72,28 +73,28 @@ class PopulationCrawler:
 
 
 if __name__ == "__main__":
+    excel_data=[]
     url = 'https://www.hongheiku.com/category/xianjirank/hunanrank' 
-    excel = PopulationCrawler.get_data(url, '湖南')
+    excel_data.append(PopulationCrawler.get_data(url, '湖南'))
 
     url = 'https://www.hongheiku.com/category/xianjirank/hbsxsqrk' 
-    excel1 = PopulationCrawler.get_data(url, '湖北')
+    excel_data.append(PopulationCrawler.get_data(url, '湖北'))
 
     url = 'https://www.hongheiku.com/category/xianjirank/gdxsqpm' 
-    excel2 = PopulationCrawler.get_data(url, '广东')
+    excel_data.append(PopulationCrawler.get_data(url, '广东'))
 
     url = 'https://www.hongheiku.com/category/xianjirank/gxxsq'
-    excel3 = PopulationCrawler.get_data(url, '广西')
+    excel_data.append(PopulationCrawler.get_data(url, '广西'))
     
     row_list_new=[]
-    for population_datum in excel:
-        row_list_new.append(population_datum)
-    for population_datum in excel1:
-        row_list_new.append(population_datum)
-    for population_datum in excel2:
-        row_list_new.append(population_datum)
-    for population_datum in excel3:
-        row_list_new.append(population_datum)
-        
+
+    for excel_datum in excel_data:
+        for population_datum in excel_datum:
+            row_list_new.append(population_datum)
+
     print('开始生成excel')
     df = pd.DataFrame(row_list_new, columns=['省','市', '县', '人口数'])
     df.to_excel("县人口统计.xlsx", index=False)
+    print('生成excel完成')
+    #3s后关闭窗口
+    time.sleep(3)
