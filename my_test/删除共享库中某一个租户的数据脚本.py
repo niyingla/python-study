@@ -3,7 +3,7 @@ import time
 import mysql.connector
 
 start_time = time.time()
-#清除租户id
+#清除租户id 106708,106703,106721,106772,106773
 tenant_id = 106708
 #清除共享库序号
 share_db_seq = 13
